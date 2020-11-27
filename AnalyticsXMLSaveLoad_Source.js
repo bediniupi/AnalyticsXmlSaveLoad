@@ -19,6 +19,13 @@ function bkLoadXml(xmlbox) {
         const newxml = new FileReader();
         newxml.onload = function() {
             xmlbox.value = newxml.result;
+            var apply = confirm("New xml analysis loaded: press OK to apply it");
+            if (apply) {
+                document.getElementById('advancedTabApplyXmlButton').click();
+                return;
+                } else {
+                return;
+                }
             };
         newxml.readAsText(this.files[0]);
         });
@@ -31,6 +38,6 @@ if (!document.body.contains(document.getElementById('bk-script'))) {
     bkScript.text = bkScrCode;
     document.body.appendChild(bkScript);
 };
-var bkButtons=`<span id="bkLoadSaveXML" class="masterToolbarTextButton minibuttonOn">AnalyticsLoadSave Bookmarklet: <a id="bkSave" onclick="var xmlbox = document.getElementsByName('XmlText')[0]; bkSaveXml(xmlbox);" href="javascript:void(null)">Save XML</a> | <a id="bkLoad" onclick="var xmlbox = document.getElementsByName('XmlText')[0]; bkLoadXml(xmlbox);" href="javascript:void(null)">Load XML</a></span>`;
+var bkButtons=`<span id="bkLoadSaveXML" class="masterToolbarTextButton minibuttonOn"><span id="bkTitle" onMouseOver="this.style.color='#000';">AnalyticsLoadSave Bookmarklet: </span><a id="bkSave" onclick="var xmlbox = document.getElementsByName('XmlText')[0]; bkSaveXml(xmlbox);" href="javascript:void(null)">Save XML</a> | <a id="bkLoad" onclick="var xmlbox = document.getElementsByName('XmlText')[0]; bkLoadXml(xmlbox);" href="javascript:void(null)">Load XML</a></span>`;
 var xmlBtn = document.getElementById('advancedTabApplyXmlButton');
 xmlBtn.insertAdjacentHTML('beforebegin', bkButtons);
